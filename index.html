@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucy Meadow</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --text-muted: #999;
+      --border: rgba(0, 0, 0, 0.08);
+      --card-bg: #ffffff;
+      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 20px rgba(0, 0, 0, 0.03);
+      --card-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 30px rgba(0, 0, 0, 0.06);
+      --radius: 12px;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 5rem 2rem 1.5rem;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    /* ── Portal Grid ── */
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portal-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portal-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-visual {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-visual .emoji-bg {
+      font-size: 4rem;
+      opacity: 0.9;
+      transition: transform 0.4s ease;
+    }
+
+    .portal-card:hover .emoji-bg {
+      transform: scale(1.1);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body .card-description {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-meta {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .card-tag {
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Card themes */
+    .card-photography .card-visual { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
+    .card-photography .card-tag { background: #f0f0f0; color: #444; }
+
+    .card-trip-santa-fe .card-visual { background: linear-gradient(135deg, #3AAFA9, #6BC5B8); }
+    .card-trip-santa-fe .card-tag { background: #DEF2F1; color: #2A8A85; }
+
+    .card-trip-kauai .card-visual { background: linear-gradient(135deg, #4A90D9, #67B8DE); }
+    .card-trip-kauai .card-tag { background: #E3F0FC; color: #3A72AA; }
+
+    /* ── Footer ── */
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 640px) {
+      header { padding: 3.5rem 1.5rem 1rem; }
+      .portal-grid { grid-template-columns: 1fr; }
+      .card-visual { height: 140px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lucy Meadow</h1>
+    <p>Personal projects, trip guides, and photography</p>
+  </header>
+
+  <main>
+    <div class="portal-grid">
+
+      <!-- PORTAL_ENTRY: photography -->
+      <a href="https://lucyjacobsonmeadowphotography.com" class="portal-card card-photography">
+        <div class="card-visual">
+          <span class="emoji-bg">📷</span>
+        </div>
+        <div class="card-body">
+          <h2>Photography</h2>
+          <p class="card-description">Travel photography from around the world — Beijing, Vietnam, Japan, California, and more.</p>
+          <div class="card-meta">
+            <span class="card-tag">Portfolio</span>
+            <span>lucyjacobsonmeadowphotography.com</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PORTAL_ENTRY: santa-fe-2026 -->
+      <a href="https://lucymeadow.github.io/santa-fe-2026/" class="portal-card card-trip-santa-fe">
+        <div class="card-visual">
+          <span class="emoji-bg">🌵</span>
+        </div>
+        <div class="card-body">
+          <h2>Santa Fe Girls Trip</h2>
+          <p class="card-description">Lucy, Susan & Hannah — May 22–25, 2026. Day-by-day itinerary, maps, dining, and group polls.</p>
+          <div class="card-meta">
+            <span class="card-tag">Trip Guide</span>
+            <span>May 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PORTAL_ENTRY: kauai-2026 -->
+      <div class="portal-card card-trip-kauai" style="opacity: 0.65; cursor: default;">
+        <div class="card-visual">
+          <span class="emoji-bg">🌺</span>
+        </div>
+        <div class="card-body">
+          <h2>Kauai Family Vacation</h2>
+          <p class="card-description">Jacobson-Meadow family trip — June 13–20, 2026. Princeville, North Shore. 7 nights of beaches, hikes, and sunsets.</p>
+          <div class="card-meta">
+            <span class="card-tag">Coming Soon</span>
+            <span>June 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PORTAL_ENTRY_END -->
+
+    </div>
+  </main>
+
+  <footer>Lucy Meadow — 2026</footer>
+</body>
+</html>
